@@ -1,2 +1,2 @@
 # GradCafe
-Scraping Grad Cafe political science results page and playing around with the data
+Scraping Grad Cafe political science results page and displaying the data.
