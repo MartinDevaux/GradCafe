@@ -5,13 +5,13 @@ date: "4/5/2020"
 output: github_document
 ---
 
-```{r}
+```{r, echo = F, warning = F, message = F}
 library(tidyverse)
 ```
 
 This is the file where I will explain the idea and the process.
 
-```{r}
+```{r, echo = F}
 
 test_object <- "TEST"
 print(test_object)
