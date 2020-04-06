@@ -515,5 +515,5 @@ data <- data %>%
 
 # Remove strings
 data <- data %>% 
-  select(-c(date_added, date_received))
-
+  select(-c(date_added, date_received)) %>% 
+  filter(is.na(date_decision) == F)
