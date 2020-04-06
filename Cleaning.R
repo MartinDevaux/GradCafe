@@ -504,6 +504,9 @@ data <- data %>%
 ## Get date format for dates ---------------------------------------------------
 
 data <- data %>% 
+  filter(date_received != "0 Feb 2014")
+
+data <- data %>% 
   mutate(
     date_decision = dmy(date_received)
   )
@@ -515,5 +518,4 @@ data <- data %>%
 
 # Remove strings
 data <- data %>% 
-  select(-c(date_added, date_received)) %>% 
-  filter(is.na(date_decision) == F)
+  select(-c(date_added, date_received))
