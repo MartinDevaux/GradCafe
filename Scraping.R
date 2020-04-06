@@ -85,12 +85,14 @@ for(i in 3:pages) {
 
 remove(i)
 
+result_posts_table <- as_tibble(result_posts_table)
+
 ## Get date/time of retrieval ------------------------------------------------
 
-retrieval_time <- str_remove_all(str_extract(as.character(Sys.time()), "[0-9]+-[0-9]+-[0-9]+"), "-")
-
+retrieval_time <- Sys.time()
+result_posts_table$`Time scraped` <- retrieval_time
 ## Save the data  ------------------------------------------------------------
 
-save(result_posts_table, file = str_c(retrieval_time,"_data.Rdata"))
+save(result_posts_table, file = str_c("raw_scraped_data.Rdata"))
 
 remove(retrieval_time, result_posts_table, url, pages)
