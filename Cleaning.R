@@ -508,12 +508,15 @@ data <- data %>%
 
 data <- data %>% 
   mutate(
-    date_decision = dmy(date_received)
+    decision_year = str_extract(date_received, "[0-9][0-9][0-9][0-9]"),
+    decision_month_day = str_remove(date_received, " [0-9][0-9][0-9][0-9]")
   )
+
 
 data <- data %>% 
   mutate(
-    date_post = dmy(date_added)
+    post_year = str_extract(date_added, "[0-9][0-9][0-9][0-9]"),
+    post_month_day = str_remove(date_added, " [0-9][0-9][0-9][0-9]")
   )
 
 # Remove strings
