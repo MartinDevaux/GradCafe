@@ -509,16 +509,18 @@ data <- data %>%
 data <- data %>% 
   mutate(
     decision_year = str_extract(date_received, "[0-9][0-9][0-9][0-9]"),
-    decision_year = as.integer(decision_year),
+    decision_year = factor(decision_year),
+    decision_year = factor(decision_year, levels = rev(levels(decision_year))),
     decision_month_day = str_remove(date_received, " [0-9][0-9][0-9][0-9]"),
-    decision_month_day = parse_date_time(decision_month_day, orders = "dm")
+    decision_month_day = parse_date_time(decision_month_day, orders = "dm"),
+    decision_month_day = as.Date(decision_month_day)
   )
 
 
 data <- data %>% 
   mutate(
     post_year = str_extract(date_added, "[0-9][0-9][0-9][0-9]"),
-    post_year = as.integer(post_year),
+    # post_year = as.integer(post_year),
     post_month_day = str_remove(date_added, " [0-9][0-9][0-9][0-9]"),
     post_month_day = parse_date_time(post_month_day, orders = "dm")
   )
