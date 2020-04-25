@@ -476,7 +476,7 @@ data <- data %>%
 # Quant
 data <- data %>% 
   mutate(
-    GRE_Q = str_remove_all(str_extract(decision_means_date, "/[0-9]+/"), "/")
+    GRE_Q = str_remove_all(str_extract(GRE, "/[0-9]+/"), "/")
   )
 data$GRE_Q <- as.numeric(data$GRE_Q)
 
@@ -487,7 +487,7 @@ data <- data %>%
 # Writing
 data <- data %>% 
   mutate(
-    GRE_W = str_extract(decision_means_date, "[0-9]\\.[0-9]+")
+    GRE_W = str_extract(GRE, "[0-9]\\.[0-9]+")
   )
 data$GRE_W <- as.numeric(data$GRE_W)
 
