@@ -41,49 +41,49 @@ result_posts_table <- result_posts_table[[1]]
 # to test whether the appending worked.
 
 # Import new page
-url_2 <- "https://www.thegradcafe.com/survey/index.php?q=Political+Science&t=a&o=&p=2"
+url <- "https://www.thegradcafe.com/survey/index.php?q=Political+Science&t=a&o=&p=2"
 
 # Get the table
-result_posts_table_2 <- url_2 %>%
+new_rows <- url %>%
   read_html() %>%
   html_nodes(xpath = '//table[@class="submission-table"]') %>% 
   html_table() # Obtains a list
 
 # Get the dataframe in that list
-result_posts_table_2 <- result_posts_table_2[[1]]
+new_rows <- new_rows[[1]]
 
 # Append the two tables
-result_posts_table <- rbind(result_posts_table, result_posts_table_2)
+result_posts_table <- bind_rows(result_posts_table, new_rows)
 
 # Get rid of new objects
-remove(url_2, result_posts_table_2)
+# remove(url, new_rows)
 
 ## Turn that into a loop ------------------------------------------------
 
 for(i in 3:pages) {
   # Import new page
-  url_i <- str_c("https://www.thegradcafe.com/survey/index.php?q=Political+Science&t=a&o=&p=", as.character(i))
+  url <- str_c("https://www.thegradcafe.com/survey/index.php?q=Political+Science&t=a&o=&p=", as.character(i))
   
   # Get the table
-  result_posts_table_i <- url_i %>%
+  new_rows <- url %>%
     read_html() %>%
-    html_nodes(xpath = '//table[@class="submission-table"]') %>% 
+    html_nodes(xpath = '//table[@class="submission-table"]') %>%
     html_table() # Obtains a list
   
   # Get the dataframe in that list
-  result_posts_table_i <- result_posts_table_i[[1]]
+  # new_rows <- new_rows[[1]]
   
   # Append the two tables
-  result_posts_table <- rbind(result_posts_table, result_posts_table_i)
+  result_posts_table <- bind_rows(result_posts_table, new_rows[[1]])
   
   # Get rid of new objects
-  remove(url_i, result_posts_table_i)
+  # remove(url, new_rows)
   
   print(str_c(i, " out of ", pages))
-
+  
 }
 
-remove(i)
+remove(i, url, new_rows)
 
 result_posts_table <- as_tibble(result_posts_table)
 
@@ -95,4 +95,4 @@ result_posts_table$`Time scraped` <- retrieval_time
 
 save(result_posts_table, file = str_c("raw_scraped_data.Rdata"))
 
-remove(retrieval_time, result_posts_table, url, pages)
+remove(retrieval_time, result_posts_table, pages)
