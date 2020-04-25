@@ -519,3 +519,7 @@ data <- data %>%
 # Remove strings
 data <- data %>% 
   select(-c(date_added, date_received))
+
+save(data, file = "cleaned_data.Rdata")
+
+

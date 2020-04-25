@@ -93,6 +93,6 @@ retrieval_time <- Sys.time()
 result_posts_table$`Time scraped` <- retrieval_time
 ## Save the data  ------------------------------------------------------------
 
-save(result_posts_table, file = str_c("raw_scraped_data.Rdata"))
+save(result_posts_table, file = "raw_scraped_data.Rdata")
 
 remove(retrieval_time, result_posts_table, pages)
