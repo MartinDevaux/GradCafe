@@ -51,6 +51,7 @@ data <- data %>%
   mutate(institution = replace(institution, str_detect(institution, "Wester Michigan"), "WMU")) %>%
   mutate(institution = replace(institution, str_detect(institution, "Michigan"), "Michigan")) %>%
   mutate(institution = replace(institution, str_detect(institution, "Yale"), "Yale University")) %>%
+  mutate(institution = replace(institution, str_detect(institution, "British Columbia"), "UBC")) %>%
   mutate(institution = replace(institution, str_detect(institution, "Columbia"), "Columbia University")) %>%
   mutate(institution = replace(institution, str_detect(institution, "Columbai University"), "Columbia University")) %>%
   mutate(institution = replace(institution, str_detect(institution, "Duke"), "Duke University")) %>%
