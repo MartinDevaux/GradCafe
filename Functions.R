@@ -1,3 +1,20 @@
+load("cleaned_data.Rdata")
+
+unique_institutions <- data %>% 
+  select(institution) %>% 
+  unique() %>%
+  arrange(institution)
+
+years <- data %>% 
+  select(decision_year) %>% 
+  unique() %>%
+  arrange(decision_year)
+
+decisions <- data %>%
+  select(decision) %>% 
+  unique() %>%
+  filter(is.na(decision) == F) %>% 
+  arrange(decision)
 
 
 # Dataviz function --------------------------------------------------------
@@ -8,19 +25,20 @@ decision_calendar <- function(institutions, decisions, years) {
   data_to_visualize <- data %>%
     filter(institution %in% institutions,
            decision %in% decisions,
-           decision_year %in% years) %>% 
+           decision_year %in% years) %>%
     group_by(institution,
              decision_month_day) %>%
     arrange(decision) %>% 
     mutate(
       id = row_number()
     )
+
   
   plot <- ggplot(data = data_to_visualize,
                  aes(x = decision_month_day,
                      y = id,
-                     text = str_wrap(string = paste(paste("Date received:", format(decision_month_day, "%b %d"), decision_year), notes, sep = "<br>"),
-                                     width = 40))) +
+                     text = str_wrap(string = paste(paste("Date received: ", format(decision_month_day, "%b %d"), ", ", decision_year, sep = ""), notes, sep = "<br>"),
+                                     width = 45))) +
     geom_point(data = data_to_visualize,
                aes(color = decision),
                size = 2.5,
@@ -28,14 +46,11 @@ decision_calendar <- function(institutions, decisions, years) {
     scale_x_date(date_labels = "%b %d",
                  date_breaks = "2 week",
                  date_minor_breaks = "1 days") +
-    scale_y_continuous(expand = c(0, 0), limits = c(0.5, max(21, max(data_to_visualize$id + 1)))) +
+    scale_y_continuous(expand = c(0, 0), limits = c(0.5, max(25, max(data_to_visualize$id + 1)))) +
     scale_color_manual(breaks = c("Accepted", "Interview", "Wait listed", "Rejected", "Other"),
                        values = c("#4daf4a", "#984ea3", "#377eb8", "#e41a1c", "#ff7f00"),
                        name = "Decision type:") +
     coord_cartesian(xlim = as.Date(c("2020-01-01", "2020-05-01"))) +
-    # facet_wrap(~ decision_year,
-    #            nrow = length(data_to_visualize$decision_year),
-    #            scales = "free_y") +
     labs(x = "", y = "", title = paste("School:", institutions)) +
     theme_minimal() +
     theme(
@@ -49,7 +64,7 @@ decision_calendar <- function(institutions, decisions, years) {
   
   
   ggplotly(plot, tooltip = c("text")) %>%
-    layout(legend = list(orientation = "h", x = 0.4, y = -0.2))
+    layout(legend = list(orientation = "h", x = 0, y = -0.2))
   
 }
 
@@ -66,10 +81,11 @@ first_acceptance <- function(institutions, decisions, years) {
   key_dates <- data_to_visualize %>% 
     select(decision, decision_month_day) %>% 
     filter(decision %in% c("Accepted")) %>% 
-    group_by(decision) %>% 
-    summarize(
-      first_date = min(decision_month_day)
-    )
+      group_by(decision) %>% 
+      summarize(
+        first_date = min(decision_month_day)
+      )
+  
   if (dim(key_dates)[1] == 1) first_acceptance_date <- key_dates$first_date[[1]]
   
   if (exists(x = "first_acceptance_date") == T) {
@@ -88,10 +104,10 @@ first_rejection <- function(institutions, decisions, years) {
   key_dates <- data_to_visualize %>% 
     select(decision, decision_month_day) %>% 
     filter(decision %in% c("Rejected")) %>% 
-    group_by(decision) %>% 
-    summarize(
-      first_date = min(decision_month_day)
-    )
+      group_by(decision) %>% 
+      summarize(
+        first_date = min(decision_month_day)
+      )
   
   if (dim(key_dates)[1] == 1) first_rejection_date <- key_dates$first_date[[1]]
   
@@ -110,15 +126,11 @@ first_waitlist <- function(institutions, decisions, years) {
   
   key_dates <- data_to_visualize %>% 
     select(decision, decision_month_day) %>% 
-    filter(decision %in% c("Wait listed"))
-  
-  if (dim(key_dates)[1] == 1) {
-    key_dates <- key_dates %>% 
+    filter(decision %in% c("Wait listed")) %>% 
       group_by(decision) %>% 
       summarize(
         first_date = min(decision_month_day)
       )
-  }
   
   if (dim(key_dates)[1] == 1) first_waitlist_date <- key_dates$first_date[[1]]
   
@@ -137,15 +149,11 @@ first_interview<- function(institutions, decisions, years) {
   
   key_dates <- data_to_visualize %>% 
     select(decision, decision_month_day) %>% 
-    filter(decision %in% c("Interview"))
-  
-  if (dim(key_dates)[1] == 1) {
-    key_dates <- key_dates %>% 
+    filter(decision %in% c("Interview")) %>% 
       group_by(decision) %>% 
       summarize(
         first_date = min(decision_month_day)
       )
-  }
   
   if (dim(key_dates)[1] == 1) first_interview_date <- key_dates$first_date[[1]]
   
