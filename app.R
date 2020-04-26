@@ -46,10 +46,10 @@ ui <- fluidPage(
       fluidRow(
         column(11,
         panel(
-          p(strong("Disclaimer: "), "This project was conducted independently of the GradCafe team and any mistake is the author's. None of the information displayed comes from official sources."),
-          p("Work in progress. Contact the author on ", a("Twitter", href = "https://twitter.com/MartinDevaux"), " or ", a("GitHub", href = "https://github.com/MartinDevaux", ".")
+          p(strong("Disclaimer: "), "This project was conducted independently of the ", a("GradCafe", href = "https://www.thegradcafe.com/"), " team and any mistake is the author's. None of the information displayed comes from official sources."),
+          p("Work in progress. Contact the author on ", a("Twitter", href = "https://twitter.com/MartinDevaux"), " or ", a("GitHub", href = "https://github.com/MartinDevaux"), ".")
           ))
-      )),
+      ),
       fluidRow(
         column(11,
         panel(
@@ -61,7 +61,7 @@ ui <- fluidPage(
         panel(
         textOutput("first_acceptance"),
         textOutput("first_rejection"),
-        textOutput("first_interview"),
+        textOutput("first_∑interview"),
         textOutput("first_waitlist"),
         )),
         column(width = 5,
