@@ -59,10 +59,11 @@ ui <- fluidPage(
       fluidRow(
         column(width = 6,
         panel(
-        textOutput("first_acceptance"),
-        textOutput("first_rejection"),
-        textOutput("first_∑interview"),
-        textOutput("first_waitlist"),
+          p("Over the period:"),
+          textOutput("first_acceptance"),
+          textOutput("first_rejection"),
+          textOutput("first_interview"),
+          textOutput("first_waitlist")
         )),
         column(width = 5,
         img(src = "logo.png", align = "right", width = 305)
