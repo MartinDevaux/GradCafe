@@ -33,23 +33,25 @@ ui <- fluidPage(
         checkboxGroupInput("years", 
                     label = "Include results from:",
                     choices = years[[1]],
-                    selected = 2020),
+                    selected = 2020,
+                    inline = TRUE),
         
         checkboxGroupInput("decisions", 
                            label = "Include posts including:",
                            choices = decisions[[1]],
-                           selected = c("Accepted", "Rejected"))
+                           selected = c("Accepted", "Rejected"),
+                           inline = TRUE)
       )
     ),
     
     mainPanel(
-      fluidRow(
-        column(11,
-        panel(
-          p(strong("Disclaimer: "), "This project was conducted independently of the ", a("GradCafe", href = "https://www.thegradcafe.com/"), " team and any mistake is the author's. None of the information displayed comes from official sources."),
-          p("Work in progress. Contact the author on ", a("Twitter", href = "https://twitter.com/MartinDevaux"), " or ", a("GitHub", href = "https://github.com/MartinDevaux"), ".")
-          ))
-      ),
+      # fluidRow(
+      #   column(11,
+      #   panel(
+      #     p(strong("Disclaimer: "), "This project was conducted independently of the ", a("GradCafe", href = "https://www.thegradcafe.com/"), " team and any mistake is the author's. None of the information displayed comes from official sources."),
+      #     p("Work in progress. Contact the author on ", a("Twitter", href = "https://twitter.com/MartinDevaux"), " or ", a("GitHub", href = "https://github.com/MartinDevaux"), ".")
+      #     ))
+      # ),
       fluidRow(
         column(11,
         panel(
