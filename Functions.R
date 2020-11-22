@@ -3,7 +3,8 @@ load("cleaned_data.Rdata")
 unique_institutions <- data %>% 
   select(institution) %>% 
   unique() %>%
-  arrange(institution)
+  rename(Institution = institution) %>% 
+  arrange(Institution)
 
 years <- data %>% 
   select(decision_year) %>% 

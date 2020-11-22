@@ -190,10 +190,10 @@ data <- data %>%
   mutate(institution = replace(institution, str_detect(institution, "Barbara"), "UC-Santa Barbara")) %>% 
   mutate(institution = replace(institution, str_detect(institution, "UC Santa Barbar"), "UC-Santa Barbara")) %>% 
   mutate(institution = replace(institution, str_detect(institution, "UCSB"), "UC-Santa Barbara")) %>% 
-  mutate(institution = replace(institution, str_detect(institution, "University Of Massachusetts"), "University Of Massachusetts")) %>% 
-  mutate(institution = replace(institution, str_detect(institution, "UMass"), "University Of Massachusetts")) %>% 
-  mutate(institution = replace(institution, str_detect(institution, "UMASS"), "University Of Massachusetts")) %>% 
-  mutate(institution = replace(institution, str_detect(institution, "Amherst"), "University Of Massachusetts")) %>% 
+  mutate(institution = replace(institution, str_detect(institution, "University Of Massachusetts"), "University of Massachusetts")) %>% 
+  mutate(institution = replace(institution, str_detect(institution, "UMass"), "University of Massachusetts")) %>% 
+  mutate(institution = replace(institution, str_detect(institution, "UMASS"), "University of Massachusetts")) %>% 
+  mutate(institution = replace(institution, str_detect(institution, "Amherst"), "University of Massachusetts")) %>% 
   mutate(institution = replace(institution, str_detect(institution, "North Texas"), "North Texas")) %>% 
   mutate(institution = replace(institution, str_detect(institution, "Boston College"), "Boston College")) %>% 
   mutate(institution = replace(institution, str_detect(institution, "Boston  College"), "Boston College")) %>% 
@@ -351,6 +351,7 @@ data <- data %>%
   filter(!str_detect(institution, "Dublin")) %>% 
   filter(!str_detect(institution, "Alberta")) %>% 
   filter(!str_detect(institution, "Carbondale")) %>% 
+  filter(!str_detect(institution, "Henry Jackson")) %>%
   filter(!str_detect(institution, "Dalhousie"))
   
 data <- data %>% 
