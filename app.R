@@ -13,14 +13,11 @@ source("Functions.R")
 # User interface ----
 ui <- fluidPage(
   
-  setBackgroundColor("#3d6594"),
+  # setBackgroundColor("#3d6594"),
   useShinyjs(),
-  titlePanel(h1("Political science PhD admission: result dates", style = "color:white")),
-  
+  panel(),
   sidebarLayout(
     sidebarPanel(
-      
-      actionButton("resetAll", "Reset all"),
       
       div(
         id = "form",
@@ -28,19 +25,21 @@ ui <- fluidPage(
         selectInput("Institutions", 
                     label = "Which school are you applying to?",
                     choices = unique_institutions,
-                    multiple = F),
+                    multiple = F,
+                    selected = "Columbia University"),
         
         checkboxGroupInput("years", 
                     label = "Include results from:",
                     choices = years[[1]],
-                    selected = 2020,
+                    selected = c(2020, 2019),
                     inline = TRUE),
         
         checkboxGroupInput("decisions", 
                            label = "Include posts including:",
                            choices = decisions[[1]],
                            selected = c("Accepted", "Rejected"),
-                           inline = TRUE)
+                           inline = TRUE),
+        actionButton("resetAll", "Reset all")
       )
     ),
     
@@ -59,17 +58,14 @@ ui <- fluidPage(
         ))
       ),
       fluidRow(
-        column(width = 6,
-        panel(
+        column(11,
+          panel(
           p("Over the period:"),
           textOutput("first_acceptance"),
           textOutput("first_rejection"),
           textOutput("first_interview"),
           textOutput("first_waitlist")
-        )),
-        column(width = 5,
-        img(src = "logo.png", align = "right", width = 305)
-        )
+        ))
     ))
   )
 )
