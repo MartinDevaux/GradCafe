@@ -12,6 +12,7 @@ source("Functions.R")
 
 # User interface ----
 ui <- fluidPage(
+  tags$head(includeHTML(("site_tag.html"))),
   
   # setBackgroundColor("#3d6594"),
   useShinyjs(),
