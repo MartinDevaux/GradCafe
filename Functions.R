@@ -49,7 +49,7 @@ decision_calendar <- function(institutions, decisions, years) {
                  date_minor_breaks = "1 days") +
     scale_y_continuous(expand = c(0, 0), limits = c(0.5, max(25, max(data_to_visualize$id + 1)))) +
     scale_color_manual(breaks = c("Accepted", "Interview", "Wait listed", "Rejected", "Other"),
-                       values = c("#4daf4a", "#984ea3", "#377eb8", "#e41a1c", "#ff7f00"),
+                       values = c("#33a02c", "#b2df8a", "#a6cee3", "#1f78b4", "gray5"),
                        name = "Decision type:") +
     coord_cartesian(xlim = as.Date(c("2020-01-01", "2020-05-01"))) +
     labs(x = "", y = "", title = paste("School:", institutions)) +
